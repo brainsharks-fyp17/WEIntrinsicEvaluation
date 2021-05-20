@@ -62,6 +62,12 @@ for line in f_6:
     sentences.append(tokenizer.tokenize(line))
 
 print("Finished File 6")
+f_6.close()
+f_5.close()
+f_4.close()
+f_3.close()
+f_2.close()
+f_1.close()
 
 # if you want you can save the processed corpus into seperate file in the disk so that you can save your time next time training
 pickle_out = open("sentences.pickle", "wb")
