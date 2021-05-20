@@ -71,6 +71,7 @@ f_2.close()
 f_1.close()
 print("Files closed")
 
+
 # if you want you can save the processed corpus into seperate file in the disk so that you can save your time next
 # time training
 # pickle_out = open("sentences.pickle", "wb")
@@ -106,21 +107,21 @@ sinhalaword2vec = w2v.Word2Vec(
     sg=1,
     seed=seed,
     workers=num_workers,
-    size=num_features,
+    vector_size=num_features,
     min_count=min_word_count,
     window=context_size,
     sample=downsampling,
-    iter=20
+    epochs=20
 )
 
 sinhalaword2vec.build_vocab(sentences)
 
 print("Word2Vec vocabulary length:", len(sinhalaword2vec.wv.vocab))
 print("Model Corpus Count", sinhalaword2vec.corpus_count)
-print("Iterations", sinhalaword2vec.iter)
+print("Epochs", sinhalaword2vec.epochs)
 
 # train model on sentences
-sinhalaword2vec.train(sentences, total_examples=sinhalaword2vec.corpus_count, epochs=sinhalaword2vec.iter)
+sinhalaword2vec.train(sentences, total_examples=sinhalaword2vec.corpus_count, epochs=sinhalaword2vec.epochs)
 
 # save model
 if not os.path.exists("trained_word2vec_300_nsw"):
