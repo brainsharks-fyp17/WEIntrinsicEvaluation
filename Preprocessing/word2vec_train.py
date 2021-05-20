@@ -113,16 +113,16 @@ sinhalaword2vec = w2v.Word2Vec(
     sample=downsampling,
     epochs=20
 )
-
+print("W2V defined")
 sinhalaword2vec.build_vocab(sentences)
-
-print("Word2Vec vocabulary length:", len(sinhalaword2vec.wv.vocab))
-print("Model Corpus Count", sinhalaword2vec.corpus_count)
-print("Epochs", sinhalaword2vec.epochs)
+print("Vocab built")
+# print("Word2Vec vocabulary length:", len(sinhalaword2vec.wv.))
+# print("Model Corpus Count", sinhalaword2vec.corpus_count)
+# print("Epochs", sinhalaword2vec.epochs)
 
 # train model on sentences
 sinhalaword2vec.train(sentences, total_examples=sinhalaword2vec.corpus_count, epochs=sinhalaword2vec.epochs)
-
+print("trained")
 # save model
 if not os.path.exists("trained_word2vec_300_nsw"):
     os.makedirs("trained_word2vec_300_nsw")
