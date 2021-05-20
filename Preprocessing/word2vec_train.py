@@ -1,8 +1,9 @@
 from __future__ import absolute_import, division, print_function
 
-# This script is for training word2vec CBOW and skipgram embeddings.
-# First we read /kaggle/working text files consists of sentences in each line and push tokenized sentences to an array.
-# Then train word2vec models with preferred hyper parameters and save trained model into the disk
+# This script is for training word2vec CBOW and skipgram embeddings. First we read
+# /home/rumesh/Downloads/FYP/datasets/preprocessed_common_si text files consists of sentences in each line and push
+# tokenized sentences to an array. Then train word2vec models with preferred hyper parameters and save trained model
+# into the disk
 
 from sinling.sinhala.tokenizer import SinhalaTweetTokenizer
 
@@ -68,11 +69,13 @@ f_4.close()
 f_3.close()
 f_2.close()
 f_1.close()
+print("Files closed")
 
-# if you want you can save the processed corpus into seperate file in the disk so that you can save your time next time training
-pickle_out = open("sentences.pickle", "wb")
-pickle.dump(sentences, pickle_out)
-pickle_out.close()
+# if you want you can save the processed corpus into seperate file in the disk so that you can save your time next
+# time training
+# pickle_out = open("sentences.pickle", "wb")
+# pickle.dump(sentences, pickle_out)
+# pickle_out.close()
 
 # count tokens, each one being a sentence
 token_count = sum([len(sentence) for sentence in sentences])
