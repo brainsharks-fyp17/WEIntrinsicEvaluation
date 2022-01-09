@@ -6,7 +6,7 @@ import codecs
 # available in https://github.com/ysenarath/sinling with several modifications. See in singling folder
 input_file = '/home/rumesh/Downloads/FYP/datasets/common-crawl-si.txt'
 if __name__ == '__main__':
-    f = codecs.open(input_file, encoding='utf-8', errors='ignore') # open source file
+    f = codecs.open(input_file, encoding='utf-8', errors='ignore')  # open source file
     f_w = codecs.open("wikipedia.si_filtered_tokenized.txt", 'w', 'utf-8')  # write to this file after processing
 
     tokenizer = SinhalaTweetTokenizer()

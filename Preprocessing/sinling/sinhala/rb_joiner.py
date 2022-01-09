@@ -231,6 +231,6 @@ def rule_10(l, r):
     r_prefix = utils.startswith(rgt, letters.VOWELS)
     if l_suffix is not None and r_prefix is not None:
         return lef[:-len(l_suffix)] + l_suffix[0] + '්' + l_suffix[0] + letters.DIACRITICS_MAPPING[r_prefix] + rgt[
-                                                                                                             len(
-                                                                                                                 r_prefix):]
+                                                                                                               len(
+                                                                                                                   r_prefix):]
     return None

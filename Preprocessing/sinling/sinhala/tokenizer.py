@@ -40,7 +40,7 @@ class SinhalaTokenizer(Tokenizer):
     def __init__(self):
         self.isolate_punctuations_with_spaces = False
         self.punctuation_marks = [
-            '.', ',', '\n', ' ', '¸', '‚','෴',
+            '.', ',', '\n', ' ', '¸', '‚', '෴',
             '"', '/', '-', '|', '\\', '—', '¦',
             '”', '‘', '\'', '“', '’', '´', '´',
             '!', '@', '#', '$', '%', '^', '&', '*', '+', '-', '£', '?', '˜',
@@ -78,21 +78,27 @@ class SinhalaTokenizer(Tokenizer):
             '0.', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.'
         ]
 
-        self.number_bullets = ['0.', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.',]
+        self.number_bullets = ['0.', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.', ]
 
         # Do not use `short_form_identifier` at `punctuation_marks`
         self.short_form_identifier = '\u0D80'
 
         #  init ignoring chars
-        self.ignoring_chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'Á', 'À', '®', '¡', 'ª', 'º', '¤','>','<'
-            '¼', '¾', 'Ó', 'ø', '½', 'ˆ', '', '¢', 'ÿ', '·', 'í', 'Ω', '°', '×', 'µ', '', '~', 'ƒ', '', 'ë', 'Î','◞',
-            '‰', '»', '«', 'à', '«', '·', '¨', '…', '⋆', '›', '¥', '⋆', '', '˝', '', '', '◊', 'Ł', '', 'ê', 'Õ', 'Ä',
-            'á', 'Ñ', 'Í', '', 'Ñ', 'ç', 'Æ', 'ô', 'Ž', '€', '§', 'Æ', '÷', 'é', '¯', 'é', 'æ', 'î', 'ï', 'ä', 'Ô', 'õ','→',
-            'È', 'Ý', 'ß', 'õ', '', 'ù', 'å', 'Ø', 'Œ', 'Ô', 'Ü', '', 'Ö', 'Û', 'Ï', 'ñ', 'ý', 'œ', '¹', '', 'É', '¯','❤',
-            'Ò', '`','"','´','“','”','*','♦','█','=','','_',''
-        ]
+        self.ignoring_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                               's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                               'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+                               'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                               'Á', 'À', '®', '¡', 'ª', 'º', '¤', '>', '<'
+                                                                       '¼', '¾', 'Ó', 'ø', '½', 'ˆ', '', '¢', 'ÿ', '·',
+                               'í', 'Ω', '°', '×', 'µ', '', '~', 'ƒ', '', 'ë', 'Î', '◞',
+                               '‰', '»', '«', 'à', '«', '·', '¨', '…', '⋆', '›', '¥', '⋆', '', '˝', '', '', '◊', 'Ł',
+                               '', 'ê', 'Õ', 'Ä',
+                               'á', 'Ñ', 'Í', '', 'Ñ', 'ç', 'Æ', 'ô', 'Ž', '€', '§', 'Æ', '÷', 'é', '¯', 'é', 'æ', 'î',
+                               'ï', 'ä', 'Ô', 'õ', '→',
+                               'È', 'Ý', 'ß', 'õ', '', 'ù', 'å', 'Ø', 'Œ', 'Ô', 'Ü', '', 'Ö', 'Û', 'Ï', 'ñ', 'ý', 'œ',
+                               '¹', '', 'É', '¯', '❤',
+                               'Ò', '`', '"', '´', '“', '”', '*', '♦', '█', '=', '', '_', ''
+                               ]
 
         # init word tokenizer
         self.word_tokenizer_delims = '[{}]'.format(
@@ -101,7 +107,7 @@ class SinhalaTokenizer(Tokenizer):
         # init line tokenizer
         self.line_tokenizer_delims = '[{}]'.format(re.escape(''.join(self.line_tokenizing_chars)))
 
-    #replace number with ########
+    # replace number with ########
     def clean_numbers(self, x):
         if bool(re.search(r'\d', x)):
             x = re.sub('[0-9]{5,}', '#####', x)
@@ -130,16 +136,16 @@ class SinhalaTokenizer(Tokenizer):
         parts = re.split(r'({})'.format(self.word_tokenizer_delims), sentence)
         tokens = [token.replace(self.short_form_identifier, '.') for token in parts if len(token.strip()) != 0]
 
-        #replace numbers with ###
+        # replace numbers with ###
         i = 0
         for token in tokens:
             tokens[i] = self.clean_numbers(token)
             i += 1
 
-        #remove punctuations
+        # remove punctuations
         new_tokens_without_punctionations = []
         for token in tokens:
-            if(token not in self.punctuation_marks):
+            if (token not in self.punctuation_marks):
                 new_tokens_without_punctionations.append(token)
 
         return new_tokens_without_punctionations
@@ -162,13 +168,13 @@ class SinhalaTokenizer(Tokenizer):
             representation = short_form[0:len(short_form) - 1] + self.short_form_identifier
             doc = doc.replace(short_form, representation)
 
-        #remove text between parenthesis.
+        # remove text between parenthesis.
         parenthesis_text = re.findall(r'\([^()]+\)', doc)
         for text in parenthesis_text:
-            if(len(text) < 40):
+            if (len(text) < 40):
                 doc = re.sub(r'\([^()]+\)', '', doc)
 
-        #clean numbers
+        # clean numbers
         # doc = self.clean_numbers(doc)
 
         sentences = []
@@ -203,7 +209,7 @@ class SinhalaTweetTokenizer(Tokenizer):
         """
         lookup = {}
         string = string.translate(self._special_chars_map)
-        var_id= 0
+        var_id = 0
         for var_type, pattern in self._var_type_pattern.items():
             vals = re.findall(pattern, string)
             for v in vals:

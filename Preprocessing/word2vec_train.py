@@ -71,7 +71,6 @@ f_2.close()
 f_1.close()
 print("Files closed")
 
-
 # if you want you can save the processed corpus into seperate file in the disk so that you can save your time next
 # time training
 # pickle_out = open("sentences.pickle", "wb")

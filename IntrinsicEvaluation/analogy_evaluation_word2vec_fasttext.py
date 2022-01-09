@@ -1,18 +1,18 @@
-#We use this file to evaulate fasttext and word2vec models in terms of analogy evaluation task
+# We use this file to evaulate fasttext and word2vec models in terms of analogy evaluation task
 import codecs
 from os import listdir
 from os.path import isfile, join
-import gensim.models.fasttext as fasttext
+
 from gensim.models import word2vec
 
-#this array of paths consists of analogy questions
-folder_paths = ["./Inflectional", "./Derivational" ,"./Encyclopedic"]
+# this array of paths consists of analogy questions
+folder_paths = ["./Inflectional", "./Derivational", "./Encyclopedic"]
 
-#load fasttext and word2vec models. One model at a time
+# load fasttext and word2vec models. One model at a time
 model = word2vec.Word2Vec.load("../NoiseRemoval/trained_word2vec_300/word2vec_300.w2v")
-#model = fasttext.FastText.load("../NoiseRemoval/trained_fasttext_300/fasttext_300.w2v")
+# model = fasttext.FastText.load("../NoiseRemoval/trained_fasttext_300/fasttext_300.w2v")
 
-#this file is used to record results of the evaluation
+# this file is used to record results of the evaluation
 f_w = codecs.open("test.txt", 'w', encoding='utf-8')
 
 for folder_path in folder_paths:
@@ -36,16 +36,18 @@ for folder_path in folder_paths:
             left_words = word_pairs[0].split(",")
             right_words = word_pairs[1].split(",")
 
-            if((right_words[0] in model.wv.vocab) and (left_words[0] in model.wv.vocab) and (left_words[1] in model.wv.vocab)):
-                results = model.most_similar_cosmul(positive=[right_words[0], left_words[1]], negative=[left_words[0]], topn = 5)
+            if ((right_words[0] in model.wv.vocab) and (left_words[0] in model.wv.vocab) and (
+                    left_words[1] in model.wv.vocab)):
+                results = model.most_similar_cosmul(positive=[right_words[0], left_words[1]], negative=[left_words[0]],
+                                                    topn=5)
                 for result in results:
-                    if (result[0] == right_words[1]):
+                    if result[0] == right_words[1]:
                         score += 1
 
             i += 1
             print(i)
 
-        #write results to a file
+        # write results to a file
         f_w.write(str(score) + "\n")
         f_w.write(str(i) + "\n")
         f_w.write("\n")

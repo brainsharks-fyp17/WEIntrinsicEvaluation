@@ -1,7 +1,8 @@
 __author__ = 'kjtdi'
-#encoding. word encodig
-#This script can be used to remove stop words from the corpus.
-#We have a predefined stop word list in "stop words.txt" file.
+
+# encoding. word encodig
+# This script can be used to remove stop words from the corpus.
+# We have a predefined stop word list in "stop words.txt" file.
 
 import codecs
 

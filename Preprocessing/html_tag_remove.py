@@ -24,4 +24,3 @@ __author__ = 'kjtdi'
 # with warc.open("SINHALA-CC-2019-04-20190917092611-000000.warc.gz") as f:
 #     for record in f:
 #         print(record.payload.read())
-
