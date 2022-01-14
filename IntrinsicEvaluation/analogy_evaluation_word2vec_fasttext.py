@@ -9,8 +9,7 @@ from gensim.models import word2vec
 folder_paths = ["./Inflectional", "./Derivational", "./Encyclopedic"]
 
 # load fasttext and word2vec models. One model at a time
-model = word2vec.Word2Vec.load("../models/word2vec-15M"
-                               "/trained_word2vec_300_nsw/word2vec_300_nsw.w2v")
+model = word2vec.Word2Vec.load("../models/trained_word2vec_300_nsw/word2vec_300_nsw.w2v")
 # model = fasttext.FastText.load("../NoiseRemoval/trained_fasttext_300/fasttext_300.w2v")
 
 # this file is used to record results of the evaluation
@@ -46,7 +45,7 @@ for folder_path in folder_paths:
                         score += 1
 
             i += 1
-            # print(i)
+            print(i)
 
         # write results to a file
         f_w.write(str(score) + "\n")
