@@ -7,12 +7,25 @@ Then we train three types of word embedding models;
 2) Glove
 3) FastText
 
-Preprocessed Data can be found via https://drive.google.com/drive/folders/1lb4-eAr1rpFFGg_rk_djPCCVYiOpY6Hi?usp=sharing
+Train data: Si-cc
 
 Trained Models (300 dimensions) can be found
-via https://drive.google.com/drive/folders/1VD8J-zYix3mD31jbIBhqK2fke-VFLD5P?usp=sharing
+Word2Vec:<br>
+word2vec 15.8M window=5,vectorsize=300,min_count=3<br>
+```
+gdown --id 1lcnIgMYPmn5t0L36F_aqQwFKkNHV_Fl0
+```
+FastText (.bin version):<br>
+fasttext 15.8M vector_size=300, window=5, min_count=3,negative=10<br>
+```
+gdown --id 1-5qOaEQF16z-3PN6KdJLqMJWw0AD57IG
+```
 
-Also, this repo contains source code and datasets to two types of intrinsic evalaution;
+Glove:
+```
+gdown --id 1pjgCsZ21R-rt2wgYqE6wAz2BVwJIBLsP
+```
+Also, this repo contains source code and datasets to two types of intrinsic evaluation;
 
 1) Analogy Evaluation
 2) Relatedness Evaluation
