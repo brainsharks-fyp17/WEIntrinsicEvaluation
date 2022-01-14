@@ -16,7 +16,7 @@ folder_paths = ["./Inflectional"]
 f_w = codecs.open("test.txt", 'w', encoding='utf-8')
 
 # load glove model
-model = Glove.load("../NoiseRemoval/trained_glove_300/glove_300.model")
+model = Glove.load("../models/glove_300.model")
 
 print("Model Loaded")
 
