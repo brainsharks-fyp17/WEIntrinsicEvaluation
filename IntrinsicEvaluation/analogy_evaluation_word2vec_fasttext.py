@@ -9,7 +9,8 @@ from gensim.models import word2vec
 folder_paths = ["./Inflectional", "./Derivational", "./Encyclopedic"]
 
 # load fasttext and word2vec models. One model at a time
-model = word2vec.Word2Vec.load("../NoiseRemoval/trained_word2vec_300/word2vec_300.w2v")
+model = word2vec.Word2Vec.load("../models/word2vec-15M"
+                               "/trained_word2vec_300_nsw/word2vec_300_nsw.w2v")
 # model = fasttext.FastText.load("../NoiseRemoval/trained_fasttext_300/fasttext_300.w2v")
 
 # this file is used to record results of the evaluation
@@ -29,23 +30,23 @@ for folder_path in folder_paths:
         i = 0
         score = 0
         # read analogy question file line by line and extract words in the analogy question.
-        # Then evluate models using analogy question
+        # Then evaluate models using analogy question
         for line in file_to_read:
             line = line.rstrip()
             word_pairs = line.split("\t")
             left_words = word_pairs[0].split(",")
             right_words = word_pairs[1].split(",")
 
-            if ((right_words[0] in model.wv.vocab) and (left_words[0] in model.wv.vocab) and (
-                    left_words[1] in model.wv.vocab)):
-                results = model.most_similar_cosmul(positive=[right_words[0], left_words[1]], negative=[left_words[0]],
-                                                    topn=5)
+            if ((right_words[0] in model.wv.index_to_key) and (left_words[0] in model.wv.index_to_key) and (
+                    left_words[1] in model.wv.index_to_key)):
+                results = model.wv.most_similar(positive=[right_words[0], left_words[1]], negative=[left_words[0]],
+                                                topn=5)
                 for result in results:
                     if result[0] == right_words[1]:
                         score += 1
 
             i += 1
-            print(i)
+            # print(i)
 
         # write results to a file
         f_w.write(str(score) + "\n")
